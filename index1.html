@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wondr by BNI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        utama: {
+                            oranye: '#FF7A2F',
+                            hijauMuda: '#86E2D5',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Arial', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <!-- ✅ KODE UNTUK OTOMATIS PINDAH HALAMAN ✅ -->
+    <meta http-equiv="refresh" content="3; url=login.html">
+    <!-- Angka "3" artinya pindah setelah 3 detik, bisa diubah sesuai keinginan -->
+</head>
+<body class="bg-utama-oranye min-h-screen flex items-center justify-center">
+
+    <!-- TULISAN DI TENGAH SESUAI GAMBAR -->
+    <div class="text-center">
+        <h1 class="text-[60px] font-bold text-white relative">
+            wondr
+            <span class="absolute left-1/2 top-[70%] -translate-x-1/2 w-12 h-2 bg-utama-hijauMuda"></span>
+           <span class="block text-[16px] font-normal mt-2">by BNI</span>
+        </h1>
+    </div>
+
+</body>
+</html>
+

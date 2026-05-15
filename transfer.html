@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transfer - Wondr by BNI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        utama: {
+                            oranye: '#FF7A2F',
+                            oranyeMuda: '#FF9A61',
+                            hijauMuda: '#86E2D5', // ✅ WARNA HIJAU MUDA
+                            kuning: '#FFD12F',
+                            biruMuda: '#91B8FF',
+                            unguMuda: '#D4B3FF',
+                            abuMuda: '#F5F5F5',
+                            abuTeks: '#666666',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Arial', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .input-style {
+                @apply w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-utama-hijauMuda;
+            }
+            /* ✅ TOMBOL PILIHAN WARNA HIJAU MUDA ✅ */
+            .tombol-pilihan {
+                @apply flex items-center gap-2 px-3 py-2 rounded-lg border text-sm font-medium bg-utama-hijauMuda/10 border-utama-hijauMuda text-utama-hijauMuda;
+            }
+            .bank-item {
+                @apply p-3 border-b border-gray-200 hover:bg-utama-abuMuda cursor-pointer rounded-lg;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans max-w-md mx-auto min-h-screen">
+
+    <!-- HEADER -->
+    <header class="bg-white px-5 py-4 flex items-center justify-between shadow-sm">
+        <a href="javascript:history.back()" class="text-lg">
+            <i class="fa fa-arrow-left text-gray-700"></i>
+        </a>
+        <h1 class="text-lg font-bold text-gray-800">Transfer</h1>
+        <div></div>
+    </header>
+
+    <main class="px-5 py-4">
+
+        <!-- PILIH JENIS TRANSFER -->
+        <section class="bg-white rounded-xl p-4 mb-4 shadow-sm">
+            <h2 class="text-sm font-semibold text-gray-500 mb-3">Jenis Transfer</h2>
+            <div class="grid grid-cols-2 gap-3 mb-4">
+                <!-- ✅ TOMBOL BNI WARNA HIJAU MUDA ✅ -->
+                <label class="tombol-pilihan justify-center">
+                    <input type="radio" name="jenis" checked class="accent-utama-hijauMuda" onclick="sembunyiBank()">
+                    BNI
+                </label>
+                <!-- ✅ TOMBOL BANK LAIN WARNA HIJAU MUDA ✅ -->
+                <label class="tombol-pilihan justify-center">
+                    <input type="radio" name="jenis" class="accent-utama-hijauMuda" onclick="tampilBank()">
+                    Bank Lain
+                </label>
+            </div>
+
+            <!-- ✅ DAFTAR BANK: MUNCUL KETIKA BANK LAIN DIPILIH ✅ -->
+            <div id="daftarBank" class="hidden space-y-1 mt-2 p-2 bg-utama-abuMuda rounded-lg">
+                <p class="text-xs text-gray-500 mb-2 font-medium">Pilih Bank Tujuan:</p>
+                <div class="bank-item">Bank Mandiri</div>
+                <div class="bank-item">Bank Rakyat Indonesia (BRI)</div>
+                <div class="bank-item">Bank Central Asia (BCA)</div>
+                <div class="bank-item">Bank Negara Indonesia (BNI)</div>
+                <div class="bank-item">Bank Tabungan Negara (BTN)</div>
+                <div class="bank-item">CIMB Niaga</div>
+                <div class="bank-item">Bank Danamon</div>
+                <div class="bank-item">Bank Permata</div>
+                <div class="bank-item">Bank Panin</div>
+                <div class="bank-item">Bank OCBC NISP</div>
+                <div class="bank-item">Bank BTPN</div>
+                <div class="bank-item">Bank Maybank Indonesia</div>
+                <div class="bank-item">Bank Sinarmas</div>
+                <div class="bank-item">Bank Bukopin</div>
+                <div class="bank-item">Bank BJB</div>
+                <div class="bank-item">Bank DKI</div>
+                <div class="bank-item">Bank Jatim</div>
+                <div class="bank-item">Bank Jateng</div>
+                <div class="bank-item">Bank Nagari</div>
+                <div class="bank-item">Bank Aceh</div>
+                <div class="bank-item">Bank Sumut</div>
+                <div class="bank-item">Bank Riau Kepri</div>
+                <div class="bank-item">Bank Sumsel Babel</div>
+                <div class="bank-item">Bank Lampung</div>
+                <div class="bank-item">Bank Jambi</div>
+                <div class="bank-item">Bank Bengkulu</div>
+                <div class="bank-item">Bank Sulselbar</div>
+                <div class="bank-item">Bank Sultra</div>
+                <div class="bank-item">Bank Sulteng</div>
+                <div class="bank-item">Bank Sulutgo</div>
+                <div class="bank-item">Bank Maluku</div>
+                <div class="bank-item">Bank Papua</div>
+                <div class="bank-item">Bank NTB</div>
+                <div class="bank-item">Bank NTT</div>
+                <div class="bank-item">BPD DIY</div>
+                <div class="bank-item">Bank Banten</div>
+            </div>
+        </section>
+
+        <!-- REKENING SUMBER -->
+        <section class="bg-white rounded-xl p-4 mb-4 shadow-sm">
+            <h2 class="text-sm font-semibold text-gray-500 mb-3">Rekening Sumber</h2>
+            <div class="p-3 bg-utama-hijauMuda/10 rounded-lg border border-utama-hijauMuda/20">
+                <p class="font-bold text-gray-800">TAPLUS</p>
+                <div class="flex justify-between items-center mt-1">
+                    <p class="text-sm">2013389189</p>
+                    <p class="text-sm font-semibold">Rp 100.000.000</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TUJUAN TRANSFER -->
+        <section class="bg-white rounded-xl p-4 mb-4 shadow-sm">
+            <div class="flex justify-between items-center mb-3">
+                <h2 class="text-sm font-semibold text-gray-500">Tujuan Transfer</h2>
+                <a href="#" class="text-utama-hijauMuda text-sm font-medium">Daftar Tersimpan</a>
+            </div>
+
+            <div class="space-y-3">
+                <div>
+                    <label class="text-xs text-gray-500 mb-1 block">Nomor Rekening Tujuan</label>
+                    <!-- ✅ TAMBAH ID AGAR BISA DIBACA PROGRAM -->
+                    <input type="number" id="nomorRekening" placeholder="Masukkan Nomor Rekening" class="input-style">
+                </div>
+                <div>
+                    <label class="text-xs text-gray-500 mb-1 block">Nama Penerima</label>
+                    <input type="text" placeholder="Nama akan muncul otomatis" class="input-style bg-gray-100" readonly>
+                </div>
+                <div>
+                    <label class="text-xs text-gray-500 mb-1 block">Jumlah Uang</label>
+                    <div class="relative">
+                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-600"></span>
+                        <input type="number" placeholder="Rp" class="input-style pl-8">
+                    </div>
+                </div>
+                <div>
+                    <label class="text-xs text-gray-500 mb-1 block">Catatan (Opsional)</label>
+                    <input type="text" placeholder="Contoh: Bayar Belanjaan" class="input-style">
+                </div>
+            </div>
+        </section>
+
+        <!-- BIAYA & WAKTU -->
+        <section class="bg-white rounded-xl p-4 mb-6 shadow-sm">
+            <div class="flex justify-between items-center text-sm mb-2">
+                <span class="text-gray-600">Biaya Admin</span>
+                <span class="font-medium" id="biayaAdmin">Rp 0</span>
+            </div>
+            <div class="flex justify-between items-center text-sm">
+                <span class="text-gray-600">Waktu Transfer</span>
+                <span class="font-medium">Real Time</span>
+            </div>
+        </section>
+
+        <!-- ✅ TOMBOL LANJUT: DITAMBAH FUNGSI CEK DAN PINDAH HALAMAN ✅ -->
+        <button id="tombolLanjut" onclick="cekDanPindah()" class="w-full py-3 bg-utama-hijauMuda text-white rounded-xl font-medium text-lg shadow-md hover:bg-utama-hijauMuda/90 transition">
+            LANJUT TRANSFER
+        </button>
+
+    </main>
+
+    <!-- ✅ JAVASCRIPT ✅ -->
+    <script>
+        function tampilBank() {
+            document.getElementById('daftarBank').classList.remove('hidden');
+            document.getElementById('biayaAdmin').innerHTML = "Rp 6.500";
+        }
+
+        function sembunyiBank() {
+            document.getElementById('daftarBank').classList.add('hidden');
+            document.getElementById('biayaAdmin').innerHTML = "Rp 0";
+        }
+
+        // ✅ FUNGSI BARU: CEK NOMOR REKENING DAN PINDAH HALAMAN ✅
+        function cekDanPindah() {
+            // Ambil isi dari kolom Nomor Rekening
+            var isiRekening = document.getElementById("nomorRekening").value;
+
+            // Cek apakah kolom sudah diisi
+            if (isiRekening !== "") {
+                // Jika SUDAH diisi: Langsung pindah ke halaman tujuan
+                window.location.href = "bukti.html"; // <--- GANTI NAMA HALAMAN TUJUAN DISINI
+            } else {
+                // Jika BELUM diisi: Munculkan peringatan
+                alert("Silakan isi Nomor Rekening Tujuan terlebih dahulu!");
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transfer Berhasil - Wondr by BNI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        utama: {
+                            oranye: '#FF7A2F',
+                            hijauMuda: '#86E2D5',
+                        },
+                        teks: {
+                            hitam: '#1A1A1A',
+                            abu: '#666666',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Arial', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .garis-pembatas {
+                @apply border-b border-gray-300 w-full my-3;
+            }
+            .teks-kanan {
+                @apply text-right font-medium;
+            }
+            .bg-bni {
+                background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.05"><text x="0" y="50" font-size="40" font-weight="bold" fill="%23999">BNI</text></svg>');
+                background-size: 100px 100px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-white font-sans max-w-md mx-auto min-h-screen py-8 px-6 relative">
+
+    <!-- WATERMARK BNI DI BELAKANG -->
+    <div class="absolute inset-0 bg-bni pointer-events-none"></div>
+
+    <!-- KONTEN UTAMA -->
+    <div class="relative z-10">
+
+        <!-- LOGO WONDR -->
+        <div class="text-center mb-8">
+            <h1 class="text-[40px] font-bold text-utama-oranye relative inline-block">
+                wondr
+                <span class="absolute left-1/2 top-[70%] -translate-x-1/2 w-10 h-1 bg-utama-hijauMuda"></span>
+                <span class="block text-[14px] text-teks-abu font-normal mt-1">by BNI</span>
+            </h1>
+        </div>
+
+        <!-- JUDUL BERHASIL -->
+        <div class="text-center mb-6">
+            <h2 class="text-[22px] font-bold text-teks-hitam mb-2">Transfer Gagal</h2>
+            <p class="text-[36px] font-bold text-teks-hitam">Rp500.000</p>
+            <p class="text-[15px] text-teks-abu mt-3">Segera kamu melakukan transfer ke rekening BRI JOKO ANDITO menggunakan rekening lain ke rekening BRI JOKO ANDITO untuk sistem mendeteksi transaksi kamu!  </p>
+        </div>
+
+        <!-- BAGIAN PENERIMA -->
+        <div class="mt-8">
+            <h3 class="text-[17px] font-bold text-teks-hitam mb-3">Penerima</h3>
+            <div class="garis-pembatas"></div>
+            <p class="text-[16px] font-medium mt-4">JOKO ANDITO</p>
+            <p class="text-[16px] font-medium mt-1">BRI • 327401008765507</p>
+        </div>
+
+        <!-- BAGIAN SUMBER DANA -->
+        <div class="mt-6">
+            <h3 class="text-[17px] font-bold text-teks-hitam mb-3">Sumber dana</h3>
+            <div class="garis-pembatas"></div>
+            <p class="text-[16px] font-medium mt-4">DORI</p>
+            <p class="text-[16px] font-medium mt-1">********185</p>
+        </div>
+
+        <!-- BAGIAN DETAIL TRANSFER -->
+        <div class="mt-6">
+            <h3 class="text-[17px] font-bold text-teks-hitam mb-3">Detail transfer</h3>
+            <div class="garis-pembatas"></div>
+
+            <div class="flex justify-between items-center my-4">
+                <span class="text-[16px] text-teks-hitam">Nominal</span>
+                <span class="teks-kanan">Rp500.000</span>
+            </div>
+
+            <div class="flex justify-between items-center my-4">
+                <span class="text-[16px] text-teks-hitam">Biaya transaksi</span>
+                <span class="teks-kanan">Rp2.500</span>
+            </div>
+
+            <div class="flex justify-between items-center my-4">
+                <span class="text-[16px] text-teks-hitam">Metode transfer</span>
+                <span class="teks-kanan">BI-FAST</span>
+            </div>
+
+            <div class="flex justify-between items-center my-4">
+                <span class="text-[16px] text-teks-hitam">BIZ ID</span>
+                <span class="teks-kanan text-right">20260429BNINIDJA01<br>000241222153</span>
+            </div>
+
+            <div class="flex justify-between items-center my-4">
+                <span class="text-[16px] text-teks-hitam">Tujuan transaksi</span>
+                <span class="teks-kanan">Lainnya</span>
+            </div>
+
+            <div class="garis-pembatas"></div>
+
+            <!-- TOTAL -->
+            <div class="flex justify-between items-center mt-4">
+                <span class="text-[17px] font-bold text-teks-hitam">Total</span>
+                <span class="text-[28px] font-bold text-teks-hitam">Rp502.500</span>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
+
