@@ -34,7 +34,7 @@
                 content-visibility: auto;
             }
             .kotak-otp {
-                @apply w-12 h-14 text-center text-xl font-bold border-2 border-gray-300 rounded-lg focus:outline-none focus:border-utama-hijauMuda focus:ring-0;
+                @apply w-10 h-12 text-center text-xl font-bold border-2 border-gray-300 rounded-lg focus:outline-none focus:border-utama-hijauMuda focus:ring-0;
             }
         }
     </style>
@@ -51,17 +51,17 @@
     <main class="px-6 py-8">
 
         <!-- JUDUL DAN INFORMASI -->
-        <div class="text-center mb-10">
-            <h1 class="text-[24px] font-bold text-teks-hitam mb-3">Verifikasi Kode OTP</h1>
-            <p class="text-[14px] text-teks-abu leading-relaxed">
+        <div class="text-center mb-8">
+            <h1 class="text-[14px] font-bold text-teks-hitam mb-3">Verifikasi Kode OTP</h1>
+            <p class="text-[10px] text-teks-abu leading-relaxed">
                 Masukkan 6 digit kode verifikasi yang<br>
                 telah dikirim Via SMS  <span class="font-bold text-teks-hitam"></span>
             </p>
         </div>
 
         <!-- 6 KOLOM OTP -->
-        <form id="formOTP" class="mb-8">
-            <div class="flex justify-between gap-2 mb-8">
+        <form id="formOTP" class="mb-6">
+            <div class="flex justify-between gap-2 mb-6">
                 <input type="Number" maxlength="1" class="kotak-otp" autofocus oninput="pindahFokus(this, 'otp2')" id="otp1">
                 <input type="Number" maxlength="1" class="kotak-otp" oninput="pindahFokus(this, 'otp3')" id="otp2">
                 <input type="Number" maxlength="1" class="kotak-otp" oninput="pindahFokus(this, 'otp4')" id="otp3">
